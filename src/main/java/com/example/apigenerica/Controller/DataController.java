@@ -1,5 +1,6 @@
 package com.example.apigenerica.Controller;
         import com.example.apigenerica.Author;
+        import com.example.apigenerica.Comentario;
         import com.example.apigenerica.Pelicula;
         import org.springframework.web.bind.annotation.*;
 
@@ -11,6 +12,7 @@ package com.example.apigenerica.Controller;
 @RestController
 class DataController {
     private ArrayList<Pelicula> peliculas=new ArrayList<>();
+
     private long id=0;
 
     DataController(){
@@ -34,7 +36,13 @@ class DataController {
         return null;
     }
 
-
+    @RequestMapping(value = "comentar",method = RequestMethod.POST)
+    public void comentar(@RequestBody Comentario comentario){
+        Pelicula pelicula=findById(comentario.getIdPelicula());
+        pelicula.comentar(comentario);
+        peliculas.remove(findById(comentario.getIdPelicula()));
+        peliculas.add(pelicula);
+    }
 
 
     private void cargarPelis(){

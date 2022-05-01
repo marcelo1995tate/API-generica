@@ -4,7 +4,7 @@ import lombok.Setter;
 
     @Getter
     @Setter
-    public class Author {
+    public class Author{
         private String name;
 
     }
